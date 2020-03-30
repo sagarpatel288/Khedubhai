@@ -1,2 +1,3 @@
 rootProject.name='Khedubhai'
-include ':app'
+include ':app', ':commons'
+project(':commons').projectDir = new File('Common/app')
