@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+//To enable the kotlin annotation processor tool and data binding apply plugin: ‘kotlin-kapt’ to the top of the app gradle file
+apply plugin: "kotlin-kapt"
 
 android {
     compileSdkVersion 29
@@ -12,27 +14,152 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    dexOptions {
+        // incremental is obsolete now
+//        incremental true
+        // https://dev.to/joshuadeguzman/speed-up-your-android-project-s-gradle-builds-1366
+        // Disable preDexLibraries if using for clean CI build
+        preDexLibraries true
+        javaMaxHeapSize "12g"
+    }
+
+    // https://developer.android.com/studio/build/optimize-your-build#optimize
+    // The defaultConfig values above are fixed, so your incremental builds don't
+    // need to rebuild the manifest (and therefore the whole APK, slowing build times).
+
+    dataBinding {
+        enabled = true
+    }
+
     buildTypes {
+        debug {
+            // https://developer.android.com/studio/build/optimize-your-build#disable_crunching
+            // https://blog.mindorks.com/speed-up-gradle-build-for-android-to-save-your-time
+            // Disables PNG crunching on DEBUG build type
+            crunchPngs false // Enabled by default for RELEASE build type
+
+            // https://dev.to/joshuadeguzman/speed-up-your-android-project-s-gradle-builds-1366?signin=true
+            /*FirebasePerformance {
+                instrumentationEnabled false
+            }*/
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
+    flavorDimensions "default"
+    productFlavors {
+        // When building a variant that uses this flavor, the following configurations
+        // override those in the defaultConfig block.
+        dev {
+            // To avoid using legacy multidex when building from the command line,
+            // set minSdkVersion to 21 or higher. When using Android Studio 2.3 or higher,
+            // the build automatically avoids legacy multidex when deploying to a device running
+            // API level 21 or higher—regardless of what you set as your minSdkVersion.
+            // Library projects cannot set applicationIdSuffix. applicationIdSuffix is set to '.dev' in flavor 'dev'.
+            versionNameSuffix "-dev"
+            applicationIdSuffix '.dev'
+            // The following configuration limits the "dev" flavor to using
+            // English stringresources and xxhdpi screen-density resources.
+            // Avoids compiling unnecessary resources
+            resConfigs "en", "xxhdpi"
+            // If you don't need to run a Crashlytics report, speed up your debug builds by disabling the plugin as follows:
+            ext.enableCrashlytics = false
+            // To prevent Crashlytics from automatically updating its build ID, add the following to your build.gradle file:
+            ext.alwaysUpdateBuildId = false
+        }
+
+        prod {
+            // If you've configured the defaultConfig block for the release version of
+            // your app, you can leave this block empty and Gradle uses configurations in
+            // the defaultConfig block instead. You still need to create this flavor.
+            // Otherwise, all variants use the "dev" flavor configurations.
+        }
+    }
+
+    // https://blog.mindorks.com/speed-up-gradle-build-for-android-to-save-your-time
+    // Turn off multiple APK Build for all other build types except release build type
+    if (project.hasProperty('devBuild')) {
+        splits.abi.enable = false
+        splits.density.enable = false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
+    def life_cycle_version = "2.2.0"
+    def room_version = "2.2.5"
+    def koin_version = "2.0.1"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Support
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation "com.google.android.material:material:1.1.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$life_cycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$life_cycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$life_cycle_version"
+//    kapt "androidx.lifecycle:lifecycle-compiler:$life_cycle_version"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$life_cycle_version"
+    // For Kotlin use kapt instead of annotationProcessor
+    implementation "androidx.activity:activity-ktx:1.1.0"
+
+    //Google
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+    // optional - RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    //Room debug db
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    // Koin Android ViewModel features
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    // Koin Arch Components for Room
+//    implementation "org.koin:koin-android-architecture:$koin_version"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
+
     implementation project(":commons")
+
+    // instrumentation tests
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+
+    // unit tests
+    testImplementation "junit:junit:4.13"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2"
+    testImplementation "org.koin:koin-test:2.0.1"
+    testImplementation "org.mockito:mockito-core:3.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 }
