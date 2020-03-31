@@ -13,4 +13,7 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+    <string name="st_demand">Demand</string>
+    <string name="st_orders">Orders</string>
+    <string name="st_reports">Reports</string>
 </resources>

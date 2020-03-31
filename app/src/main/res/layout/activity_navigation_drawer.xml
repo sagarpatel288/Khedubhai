@@ -22,4 +22,32 @@
         app:headerLayout="@layout/nav_header_navigation_drawer"
         app:menu="@menu/activity_navigation_drawer_drawer" />
 
+    <View
+        android:id="@+id/view_gesture_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/comColorTransBlack"
+        android:visibility="invisible" />
+
+    <com.alexvasilkov.gestures.commons.circle.CircleGestureImageView
+        android:id="@+id/view_gesture_circle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/view_lay_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/view_iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="@dimen/com_dim_app_space"
+            android:src="@drawable/com_ic_close_white_24dp" />
+    </LinearLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>

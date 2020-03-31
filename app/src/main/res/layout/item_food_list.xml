@@ -70,6 +70,63 @@
                 android:padding="@dimen/view_space_8"
                 >
 
+                <!--region demand layout-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/item_lay_demand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/item_tv_demand_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/com_dim_app_space"
+                        android:text="@string/st_demand"
+                        android:textAllCaps="true"
+                        android:textSize="@dimen/com_dim_tv_title"
+                        android:layout_marginEnd="@dimen/com_dim_app_space"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/item_iv_info"
+                        app:layout_constraintRight_toLeftOf="@id/item_iv_info"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/item_iv_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@id/item_tv_demand_title"
+                        app:layout_constraintBottom_toBottomOf="@id/item_tv_demand_title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:src="@drawable/com_ic_info_black_24dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/item_tv_demand_value"
+                        android:layout_width="0dp"
+                        android:ellipsize="end"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintHorizontal_bias="0"
+                        android:layout_marginEnd="@dimen/com_dim_app_space"
+                        android:layout_marginTop="@dimen/com_dim_app_space_small"
+                        android:background="@color/comColorTransparent"
+                        android:enabled="false"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textColor="@color/comColorBlack"
+                        android:textSize="@dimen/com_dim_tv_subtitle"
+                        app:layout_constraintLeft_toLeftOf="@id/item_tv_demand_title"
+                        app:layout_constraintStart_toStartOf="@id/item_tv_demand_title"
+                        app:layout_constraintTop_toBottomOf="@+id/item_tv_demand_title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:text="@string/com_st_placeholder_long" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--endregion-->
+
                 <!--region category layout-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/item_lay_category"
