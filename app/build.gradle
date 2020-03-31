@@ -163,6 +163,10 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
 
+    //ThirdParties
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
+    implementation 'com.alexvasilkov:gesture-views:2.6.0'
+
     implementation project(":commons")
 
     // instrumentation tests
