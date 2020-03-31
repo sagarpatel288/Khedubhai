@@ -37,8 +37,9 @@
 
                     <ImageView
                         android:id="@+id/item_iv_food"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/com_dim_height_image_detail"
+                        android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -366,6 +367,7 @@
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/item_lay_edit_save_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/com_dim_corner_card"
@@ -380,6 +382,14 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/view_space_8"
                     app:srcCompat="@drawable/com_ic_edit_white_24" />
+
+                <ImageView
+                    android:id="@+id/item_iv_save_detail"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/view_space_8"
+                    app:srcCompat="@drawable/com_ic_save_white_24dp" />
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
