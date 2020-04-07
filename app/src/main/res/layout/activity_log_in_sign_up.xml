@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.browngold.khedubhai.user.ui.loginsignup.LogInSignUpViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.loginsignup.LogInSignUpActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/view_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/comColorTransparent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/view_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.kekstudio.dachshundtablayout.DachshundTabLayout
+                android:id="@+id/view_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                app:ddAnimatedIndicator="dachshund"
+                app:ddCenterAlign="true"
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
