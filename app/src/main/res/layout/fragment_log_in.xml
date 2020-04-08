@@ -1,13 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.browngold.khedubhai.user.ui.loginsignup.login.LogInFragment">
 
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+            <variable
+                name="viewModel"
+                type="com.browngold.khedubhai.user.ui.loginsignup.login.LogInViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/view_nsv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:fillViewport="true"
+        tools:context="com.browngold.khedubhai.user.ui.loginsignup.login.LogInFragment">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--region Email-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/view_til_email_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/com_dim_app_space"
+                android:hint="@string/com_st_email_mobile"
+                android:visibility="visible"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/view_tiet_email_phone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/com_st_email_mobile" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--endregion-->
+
+            <!--region Code-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/view_til_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/com_dim_app_space"
+                android:hint="@string/com_st_code"
+                android:visibility="visible"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toStartOf="@id/view_til_mobile"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/view_til_mobile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/view_tiet_code"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/com_st_code" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--endregion-->
+
+            <!--region Mobile-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/view_til_mobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/com_dim_app_space"
+                android:hint="@string/com_st_mobile"
+                android:visibility="visible"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/view_til_code"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@id/view_til_code"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/view_tiet_mobile"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/com_st_mobile" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--endregion-->
+
+            <!--region Group: code & mobile for visibility purpose-->
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/view_group_code_mobile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="view_til_code, view_til_mobile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <!--endregion-->
+
+            <!--region Barrier-->
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/view_barrier_email_phone"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="view_til_email_phone, view_til_code, view_til_mobile" />
+            <!--endregion-->
+
+            <!--region Unique_id-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/view_til_unique_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/com_dim_app_space"
+                android:hint="@string/com_st_unique_id"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_barrier_email_phone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/view_tiet_unique_id"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/com_st_unique_id" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--endregion-->
+
+            <!--region Password-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/view_til_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/com_dim_app_space"
+                android:hint="@string/com_st_password"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_til_unique_id">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/view_tiet_password"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/com_st_password" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--endregion-->
+
+            <!--region Forgot Password-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/view_mbtn_forgot_pw"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/com_dim_app_space"
+                android:text="@string/com_st_forgot_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_til_password" />
+            <!--endregion-->
+
+            <!--region Don't have an account-->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/view_tv_dont_have_ac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/com_st_dont_have_an_ac"
+                app:layout_constraintEnd_toStartOf="@id/view_mbtn_sign_up"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="@id/view_mbtn_sign_up"
+                app:layout_constraintBottom_toBottomOf="@+id/view_mbtn_sign_up"
+                />
+            <!--endregion-->
+
+            <!--region Sign Up Button-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/view_mbtn_sign_up"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/com_dim_app_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/com_st_sign_up"
+                app:layout_constraintStart_toEndOf="@+id/view_tv_dont_have_ac"
+                app:layout_constraintTop_toBottomOf="@+id/view_mbtn_forgot_pw" />
+            <!--endregion-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>
