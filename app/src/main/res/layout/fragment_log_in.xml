@@ -44,7 +44,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@string/com_st_email_mobile" />
+                    tools:text="@string/com_st_email_mobile"
+                    android:text="@={viewModel.emailMutableLiveData}"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
             <!--endregion-->
@@ -72,7 +74,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@string/com_st_code" />
+                    tools:text="@string/com_st_code"
+                    android:text="@={viewModel.countryCodeMutableLiveData}"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
             <!--endregion-->
@@ -98,7 +102,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@string/com_st_mobile" />
+                    tools:text="@string/com_st_mobile"
+                    android:text="@={viewModel.mobileNumberMutableLiveData}"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
             <!--endregion-->
@@ -145,7 +151,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@string/com_st_unique_id" />
+                    tools:text="@string/com_st_unique_id"
+                    android:text="@={viewModel.uniqueIdMutableLiveData}"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
             <!--endregion-->
@@ -170,7 +178,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@string/com_st_password" />
+                    tools:text="@string/com_st_password"
+                    android:text="@={viewModel.passwordMutableLiveData}"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
             <!--endregion-->

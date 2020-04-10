@@ -22,5 +22,4 @@ class LogInSignUpActivity : BaseActivity<ActivityLogInSignUpBinding, LogInSignUp
     override fun otherStuffs() {
 
     }
-
 }

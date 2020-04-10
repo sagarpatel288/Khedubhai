@@ -115,8 +115,12 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //Support
-    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.android.support:multidex:1.0.3'
+
+    /*https://www.bignerdranch.com/blog/activity-and-fragment-layouts-with-androidx/*/
+    implementation 'androidx.appcompat:appcompat:1.1.0' // this is needed to use the updated AppCompatActivity
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation 'androidx.fragment:fragment-ktx:1.2.4'
 
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -138,7 +142,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt "androidx.lifecycle:lifecycle-common-java8:$life_cycle_version"
     // For Kotlin use kapt instead of annotationProcessor
-    implementation "androidx.activity:activity-ktx:1.1.0"
 
     //Google
     implementation 'com.google.code.gson:gson:2.8.6'
