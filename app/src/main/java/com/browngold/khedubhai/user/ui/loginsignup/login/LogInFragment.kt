@@ -6,27 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import com.browngold.khedubhai.user.R
+import com.browngold.khedubhai.user.databinding.FragmentLogInBinding
+import com.example.android.common.baseapp.BaseFragment
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class LogInFragment : Fragment() {
+class LogInFragment : BaseFragment<FragmentLogInBinding, LogInViewModel>(R.layout.fragment_log_in) {
 
     companion object {
         fun newInstance() = LogInFragment()
     }
 
-    private lateinit var viewModel: LogInViewModel
+    override val viewModel: LogInViewModel by viewModel()
+    private lateinit var dataBinding: FragmentLogInBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_log_in, container, false)
+    override fun dataBinding(dataBinding: ViewDataBinding) {
+        this.dataBinding = dataBinding as FragmentLogInBinding
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(LogInViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+    override fun otherStuffs() {
 
+    }
 }
