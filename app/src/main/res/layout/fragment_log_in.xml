@@ -193,6 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/com_dim_app_space"
                 android:text="@string/com_st_forgot_password"
+                android:onClick="@{()-> viewModel.onClickForgotPassword(viewModel.emailMutableLiveData, viewModel.countryCodeMutableLiveData, viewModel.mobileNumberMutableLiveData, viewModel.uniqueIdMutableLiveData)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view_til_password" />
