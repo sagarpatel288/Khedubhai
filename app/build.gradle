@@ -32,8 +32,10 @@ android {
     // The defaultConfig values above are fixed, so your incremental builds don't
     // need to rebuild the manifest (and therefore the whole APK, slowing build times).
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+        // for view binding :
+        viewBinding = true
     }
 
     buildTypes {
@@ -118,7 +120,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     /*https://www.bignerdranch.com/blog/activity-and-fragment-layouts-with-androidx/*/
-    implementation 'androidx.appcompat:appcompat:1.1.0' // this is needed to use the updated AppCompatActivity
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    // this is needed to use the updated AppCompatActivity
     implementation "androidx.activity:activity-ktx:1.1.0"
     implementation 'androidx.fragment:fragment-ktx:1.2.4'
 
