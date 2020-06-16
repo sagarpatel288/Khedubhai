@@ -9,5 +9,5 @@ import retrofit2.http.POST
 interface ApiService {
 
     @POST(Apis.LOG_IN)
-    suspend fun <T : Parcelable> login(@Body baseLogInRequest: BaseLogInRequest): BaseResponse<T>
+    suspend fun <T : Parcelable> login(@Body baseLogInRequest: BaseLogInRequest): BaseResponse
 }
